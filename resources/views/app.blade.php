@@ -96,7 +96,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('notices') }}">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('news') }}">
                                 <span data-feather="file"></span>
                                 Noticias
                             </a>

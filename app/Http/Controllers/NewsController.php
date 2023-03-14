@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Config;
 use Illuminate\Http\Request;
 
-
-class ConfigController extends Controller
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +13,7 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        // $config = Config::all();
-        return view('config.index');
+        return view('news.index');
     }
 
     /**
@@ -37,13 +34,7 @@ class ConfigController extends Controller
      */
     public function store(Request $request)
     {
-        // $config = new Config();
-        // $config->name = $request->nameVehicle;
-        // $config->brand = $request->brand;
-        // $config->value = $request->cost;
-        // $config->save();
-        // dd($config);
-        return redirect()->route('config')->with('success', 'Task Created succesfully');
+        //
     }
 
     /**
