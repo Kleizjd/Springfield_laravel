@@ -46,8 +46,7 @@
                                     <span class="delPhoto notBlock">X</span>
                                     <label for="foto"></label>
                                     <div>
-                                        <img id="img" class="img-responsive"
-                                            src="http://localhost//www/Springfield_News/public/img/uploads/portada_noticia.png">
+                                        <img id="img" class="img-responsive" src="http://localhost//www/Springfield_News/public/img/uploads/portada_noticia.png">
                                     </div>
                                 </div>
                                 <div class="upimg">
@@ -59,9 +58,7 @@
                     </div>
 
                     <div class="tile-footer">
-                        <button id="btnActionForm" class="btn btn-primary" type="submit"><i
-                                class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText"
-                                title="Crear Noticia">Guardar</span></button>
+                        <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText" title="Crear Noticia">Guardar</span></button>
                     </div>
                 </form>
             </div>

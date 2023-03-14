@@ -26,9 +26,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    {{-- HEADER --}}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 ">
         <div class="container-fluid">
-            {{-- <a class="navbar-brand" href="#">My tasks</a> --}}
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">
                 <span>
                     <img src="http://localhost/WWW/Springfield_News/public/img/logo.jpg" alt="ingesoftware"
@@ -40,7 +41,7 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('vehicles') }}">Vehicles</a>
@@ -49,12 +50,10 @@
                         <a class="nav-link" href="{{ route('config') }}">Ajustes</a>
                     </li>
                     <li class="nav-item">
-                        {{-- <a class="nav-link" href="{{ route('categories') }}">Categories</a> --}}
                         <a class="nav-link" href="">Categories</a>
                     </li>
                 </ul>
-
-            </div>
+            </div> --}}
 
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -79,36 +78,42 @@
             </div>
         </div>
     </nav>
-    <div class="row">
-        <div class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky shadow-lg">
-                <ul class="nav flex-column">
-                    <div class="list-group list-group-flush">
-                        <i class="fas fa-home"> <a class="list-group-item-action">Home - Dashboard</a></i>
-                        <a class="list-group-item list-group-item-action list-group-item-light p-3">Noticias</a>
-                    </div>
-                </ul>
-            </div>
-        </div>
-        <div class="col">
-            <div class="container-fluid">
-                <div class="row">
+    {{-- !HEADER --}}
 
-                    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                        <div
-                            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3 border-bottom">
-                            @yield('content')
-                        </div>
-                    </main>
+
+    <div class="container-fluid">
+        <div class="row">
+            {{-- SIDEBAR --}}
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ route('main') }}">
+                                <span data-feather="home"></span>
+                                <i class="fas fa-home"> Home - Dashboard</i>
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('notices') }}">
+                                <span data-feather="file"></span>
+                                Noticias
+                            </a>
+                        </li>
+                    </ul>
                 </div>
+            </nav>
+            {{-- !SIDEBAR --}}
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3 border-bottom">
+                    @yield('content')
+                </div>
+            </main>
 
-            </div>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>

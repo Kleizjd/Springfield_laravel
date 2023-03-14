@@ -1,5 +1,6 @@
 @extends('app')
 @section('content')
+
     <div class="container-fluid">
         <div class="card shadow-lg mt-2">
             <div class="badge bg-dark card-header">
