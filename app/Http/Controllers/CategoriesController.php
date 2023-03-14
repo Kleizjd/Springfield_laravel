@@ -36,7 +36,11 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['name'=> 'required|max:255']);
+        $category = new Category();
+        $category->name=$request->name;
+        $category->save();
+        return redirect()->route('categories')->with('success', 'Task Created succesfully');
     }
 
     /**
@@ -47,7 +51,8 @@ class CategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::find($id);
+        return view('categories.show', ['category' => $category]);
     }
 
     /**
@@ -70,7 +75,11 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        $category->name = $request->name;
+
+        $category->save();
+        return redirect()->route('categories')->with('success','Tasks Update');
     }
 
     /**
@@ -81,6 +90,12 @@ class CategoriesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $categories = Category::find($id);
+        $categories->goodNews()->each(function($goodNews){
+            $goodNews->delete();
+        });
+        $categories->delete();
+        
+        return redirect()->route('categories')->with('success', 'Task deleted succesfully');
     }
 }

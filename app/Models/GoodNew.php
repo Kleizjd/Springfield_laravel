@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class GoodNew extends Model
 {
-    protected $table = 'goodNew';
+    protected $table = 'good_news';
     use HasFactory;
 }
