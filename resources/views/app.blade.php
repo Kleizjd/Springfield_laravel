@@ -101,6 +101,18 @@
                                 Noticias
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('vehicles') }}">
+                                <span data-feather="file"></span>
+                                Vehicles
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('categories') }}">
+                                <span data-feather="file"></span>
+                                Categories
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
