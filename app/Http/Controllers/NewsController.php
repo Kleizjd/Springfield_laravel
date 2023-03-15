@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\GoodNew;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -13,7 +15,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        return view('news.index');
+        $categories = Category::all();
+        return view('news.index', ['categories' => $categories]);
     }
 
     /**
@@ -34,7 +37,21 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(['foto'=> 'required|image|max:2048']);
+        
+        $news = new GoodNew();
+        $file = $request->file('foto');
+        $nombre =  time()."_".$file->getClientOriginalName();
+        $news->title=$request->txtTitulo;
+        $news->description=$request->txtDescripcion;
+        $news->category_id=$request->category_id;
+        $news->image_user=$nombre;
+        // dd($news);
+        // dd($request);
+        $news->save();
+        
+        // // var_dump($request->input());
+        return $request->file('foto')->store('public/uploads');
     }
 
     /**

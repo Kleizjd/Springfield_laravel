@@ -40,7 +40,7 @@ class CategoriesController extends Controller
         $category = new Category();
         $category->name=$request->name;
         $category->save();
-        return redirect()->route('categories')->with('success', 'Task Created succesfully');
+        return redirect()->route('categories')->with('success', 'Category Created succesfully');
     }
 
     /**

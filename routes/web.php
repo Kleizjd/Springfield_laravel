@@ -30,6 +30,7 @@ Route::post('/config',[SettingsController::class, 'update'])->name('settings-upd
 // NEWS
 Route::get('/news',[NewsController::class, 'index'])->name('news');
 Route::post('/news',[NewsController::class, 'store'])->name('news');
+// MAIN
 Route::get('/',[MainController::class, 'index'])->name('main');
 Route::post('/',[MainController::class, 'store'])->name('main');
 // VEHICLES

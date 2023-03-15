@@ -6,8 +6,14 @@
                 <h5 class="card-title" id="titleModal">Nueva Noticia</h5>
             </div>
             <div class="card-body">
-                <form id="frm_Noticia" name="frm_Noticia" class="form-horizontal">
-
+                <form action="{{ route('news') }}" method="POST" enctype="multipart/form-data" >
+                    @csrf
+                    @if (session('success'))
+                        <h6 class="alert alert-success">{{ session('success') }}</h6>
+                    @endif
+                    {{-- @error('name')
+                        <h6 class="alert alert-danger">{{ $message }}</h6>
+                    @enderror --}}
                     <p class="text-primary">Los campos con asterisco (<span class="required">*</span>) son obligatorios.</p>
                     <div class="row pb-3">
                         <div class="col-sm-1">
@@ -18,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="control-label" for="titulo">Noticia<span class="required">*</span></label>
+                                <label class="control-label" for="titulo">Notice<span class="required">*</span></label>
                                 <input class="form-control" id="txtTitulo" name="txtTitulo" type="text"
                                     placeholder="Titulo" required>
                             </div>
@@ -28,13 +34,12 @@
                                     placeholder="Descripción de la Noticia" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="categoria">Categoria<span class="required">*</span></label>
-                                <select class="form-control selectpicker" id="categoria" name="categoria" required>
-                                    <option value="">Seleccione...</option>
-                                    <option value="1">Moda y Farandula</option>
-                                    <option value="2">Politica</option>
-                                    <option value="3">Tecnologia</option>
-                                    <option value="4">Deportes</option>
+                                <label for="category_id">Category<span class="required">*</span></label>
+                                <select name="category_id" class="form-control selectpicker" id="categoria" name="categoria" required>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
 
@@ -46,19 +51,22 @@
                                     <span class="delPhoto notBlock">X</span>
                                     <label for="foto"></label>
                                     <div>
-                                        <img id="img" class="img-responsive" src="http://localhost//www/Springfield_News/public/img/uploads/portada_noticia.png">
+                                        <img id="img" class="img-responsive"
+                                            src="http://localhost//www/Springfield_News/public/img/uploads/portada_noticia.png">
                                     </div>
                                 </div>
-                                <div class="upimg">
-                                    <input type="file" name="foto" id="foto">
-                                </div>
-                                <div id="form_alert"></div>
+                                <input id="" name="foto" type="file" accept="image/*" />
+                                @error('foto')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
                             </div>
                         </div>
                     </div>
 
                     <div class="tile-footer">
-                        <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText" title="Crear Noticia">Guardar</span></button>
+                        <button id="btnActionForm" class="btn btn-primary" type="submit"><i
+                                class="fa fa-fw fa-lg fa-check-circle"></i><span id="btnText"
+                                title="Crear Noticia">Guardar</span></button>
                     </div>
                 </form>
             </div>
