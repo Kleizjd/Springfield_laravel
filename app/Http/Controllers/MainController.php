@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GoodNew;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
@@ -13,7 +14,8 @@ class MainController extends Controller
      */
     public function index()
     {
-        return view('main');
+        $news = GoodNew::all();
+        return view('main', ['news'=>$news]);
     }
 
     /**
