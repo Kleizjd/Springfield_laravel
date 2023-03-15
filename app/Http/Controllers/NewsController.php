@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\File;
 use App\Models\GoodNew;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -46,12 +48,13 @@ class NewsController extends Controller
         $news->description=$request->txtDescripcion;
         $news->category_id=$request->category_id;
         $news->image_user=$nombre;
-        // dd($news);
-        // dd($request);
         $news->save();
         
-        // // var_dump($request->input());
-        return $request->file('foto')->store('public/uploads');
+        $imagenes = $request->file('foto')->store('public/uploads');
+        $url = Storage::url($imagenes);
+        File::create([ 'url'=>$url]);
+        return redirect()->route('news')->with('success', 'New Created succesfully');
+
     }
 
     /**
