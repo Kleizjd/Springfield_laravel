@@ -52,7 +52,7 @@
                                     <label for="foto"></label>
                                     <div>
                                         <img id="img" class="img-responsive"
-                                            src="http://localhost//www/Springfield_News/public/img/uploads/portada_noticia.png">
+                                            src="http://127.0.0.1:8000/storage/uploads/portada_noticia.png">
                                     </div>
                                 </div>
                                 <input id="" name="foto" type="file" accept="image/*" />

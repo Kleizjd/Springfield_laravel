@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\GoodNew;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MainController extends Controller
 {
@@ -15,7 +17,16 @@ class MainController extends Controller
     public function index()
     {
         $news = GoodNew::all();
-        return view('main', ['news'=>$news]);
+        // dd($news);
+        // dd($news[0]->category_id);
+        $category_news = Category::all();
+        // $category_news = DB::table('categories')
+        //      ->select(DB::raw('*'))
+        //      ->where('id', '=', 1)
+        //      ->get();
+        // // dd($news);
+        // dd($category_news);
+        return view('main', ['news'=>$news, 'category_news'=>$category_news]);
     }
 
     /**
