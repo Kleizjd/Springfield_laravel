@@ -6,7 +6,7 @@
                 <h5 class="card-title" id="titleModal">Nueva Noticia</h5>
             </div>
             <div class="card-body">
-                <form action="{{ route('news') }}" method="POST" enctype="multipart/form-data" >
+                <form action="{{ route('news') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @if (session('success'))
                         <h6 class="alert alert-success">{{ session('success') }}</h6>
@@ -35,7 +35,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="category_id">Category<span class="required">*</span></label>
-                                <select name="category_id" class="form-control selectpicker" id="categoria" name="categoria" required>
+                                <select name="category_id" class="form-control selectpicker" id="categoria" name="categoria"
+                                    required>
+                                    <option value="">Seleccione ...</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -50,12 +52,11 @@
                                 <div class="prevPhoto">
                                     <span class="delPhoto notBlock">X</span>
                                     <label for="foto"></label>
-                                    <div>
-                                        <img id="img" class="img-responsive"
-                                            src="http://127.0.0.1:8000/storage/uploads/portada_noticia.png">
-                                    </div>
+                                    <img id="img_preview" class="img-responsive"
+                                        src="http://127.0.0.1:8000/storage/uploads/portada_noticia.png">
+                                    <input id="seleccionArchivos" name="foto" type="file" accept="image/*" />
                                 </div>
-                                <input id="" name="foto" type="file" accept="image/*" />
+
                                 @error('foto')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -73,3 +74,27 @@
         </div>
     </div>
 @endsection
+<script>
+    // Obtener referencia al input y a la imagen
+    window.onload = function() {
+        const $seleccionArchivos = document.querySelector("#seleccionArchivos"),
+            $imagenPrevisualizacion = document.querySelector("#img_preview");
+
+        // Escuchar cuando cambie
+        $seleccionArchivos.addEventListener("change", () => {
+            // Los archivos seleccionados, pueden ser muchos o uno
+            const archivos = $seleccionArchivos.files;
+            // Si no hay archivos salimos de la función y quitamos la imagen
+            if (!archivos || !archivos.length) {
+                $imagenPrevisualizacion.src = "";
+                return;
+            }
+            // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+            const primerArchivo = archivos[0];
+            // Lo convertimos a un objeto de tipo objectURL
+            const objectURL = URL.createObjectURL(primerArchivo);
+            // Y a la fuente de la imagen le ponemos el objectURL
+            $imagenPrevisualizacion.src = objectURL;
+        });
+    }
+</script>

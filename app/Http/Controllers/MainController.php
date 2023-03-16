@@ -16,15 +16,10 @@ class MainController extends Controller
      */
     public function index()
     {
-        // $news = GoodNew::all();
-        // $category_news = Category::all();
         $news = DB::table('good_news')
              ->join('categories', 'categories.id', '=', 'good_news.category_id')
              ->select(DB::raw('*'))
              ->get();
-        // dd($news);
-        // dd($category_news);
-        // return view('main', ['news'=>$news, 'category_news'=>$category_news]);
         return view('main', ['news'=>$news]);
     }
 

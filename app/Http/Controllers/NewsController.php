@@ -18,7 +18,6 @@ class NewsController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $news = GoodNew::all();
         return view('news.index', ['categories' => $categories]);
     }
 
