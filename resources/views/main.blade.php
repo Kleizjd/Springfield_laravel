@@ -48,8 +48,8 @@
                                                         <div class="col-5">
                                                             <img src="{{ asset($new->image_new) }}" width="178" height="178" />
                                                             {{-- <img src="http://127.0.0.1:8000/storage/uploads/upload-user.svg" width="178" height="178" /> --}}
-                                                            <h4 id="titulo_notice">Titulo</h4>
-                                                            {{-- <p class="text-muted" id="categoria_notice">{{ $category_new->category_id }} --}}
+                                                            <h4 id="titulo_notice">{{ $new->title}}</h4>
+                                                            <p class="text-muted" id="categoria_notice">{{ $new->name }}
                                                             </p>
                                                             <p><input type="checkbox" name="option" id="me_gusta">
                                                                 <label for="check1">
