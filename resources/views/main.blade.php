@@ -13,16 +13,17 @@
                         @foreach ($news as $new)
                         <div class="col-sm-2 mx-auto">
                             <form name="formNoticia">
-                                <input type="hidden" name="email" id="email" value="jose@gmail.com">
                                 <div class="card" style="width: 10rem;">
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group">
                                             <img style="height: 5rem;"
-                                                src="/public/js/{{ $new->img_user }}"
+                                                {{-- src={{  public_path().$new->image_user}} --}}
+                                                {{-- src={{  asset('public/uploads/'.$new->image_user)}} --}}
+                                                src={{  asset($new->image_new)}}
                                                 class="card-img-top" alt="...">
                                         </li>
                                         <li class="list-group-item">
-                                            <h6 class="card-title">PLATZI</h6>
+                                            <h6 class="card-title">{{$new->title}}</h6>
                                         </li>
                                         <li class="list-group-item">
                                             <a type="button" class="btn btn-primary " data-toggle="modal" id="verN"

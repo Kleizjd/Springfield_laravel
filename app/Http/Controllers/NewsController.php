@@ -41,21 +41,21 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $request->validate(['foto'=> 'required|image|max:2048']);
-        
+           
         $news = new GoodNew();
         $file = $request->file('foto');
         $nombre =  time()."_".$file->getClientOriginalName();
         $news->title=$request->txtTitulo;
         $news->description=$request->txtDescripcion;
         $news->category_id=$request->category_id;
-        $news->image_user=$nombre;
-        $news->save();
-        
-        $imagenes = $request->file('foto')->store('public/uploads');
+        $imagenes = $request->file('foto')->storeAs('public/uploads',$nombre);
         $url = Storage::url($imagenes);
-        File::create([ 'url'=>$url]);
-        return redirect()->route('news')->with('success', 'New Created succesfully');
+        File::create(['url'=>$url]);
+        $news->image_new=$url;
 
+        $news->save();
+
+        return redirect()->route('news')->with('success', 'New Created succesfully');
     }
 
     /**
