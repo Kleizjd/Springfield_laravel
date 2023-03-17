@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="UTF-8">
@@ -41,41 +41,43 @@
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            {{-- <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('vehicles') }}">Vehicles</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('config') }}">Ajustes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Categories</a>
-                    </li>
-                </ul>
-            </div> --}}
 
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg" alt="user"
-                        class="img-circle" id="img_profile" width="60">
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                        <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10">
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
 
-                            <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg"
-                                alt="user" class="img-circle" width="60">
-                            <div class="m-l-10">
-                                <h7 class="m-b-0" id="complete_name_window">juan osorio</h7>
-                            </div>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                     </li>
-                    <li><a class="dropdown-item" href="{{ route('config') }}">Ajustes</a></li>
-                    <li><a class="dropdown-item" href="#">Salir</a></li>
-                </ul>
-            </div>
+                @endguest
+            </ul>
         </div>
     </nav>
     {{-- !HEADER --}}
@@ -96,19 +98,16 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('news') }}">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                                href="{{ route('news') }}">
                                 <span data-feather="file"></span>
-                                Noticias
+                                News
                             </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('vehicles') }}">
-                                <span data-feather="file"></span>
-                                Vehicles
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('categories') }}">
+                            <a class="list-group-item list-group-item-action list-group-item-light p-3"
+                                href="{{ route('categories') }}">
                                 <span data-feather="file"></span>
                                 Categories
                             </a>

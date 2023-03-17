@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BreakingNew;
 use App\Models\Category;
 use App\Models\File;
-use App\Models\GoodNew;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
@@ -39,18 +40,18 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['foto'=> 'required|image|max:2048']);
-           
-        $news = new GoodNew();
+        $request->validate(['foto' => 'required|image|max:2048']);
+
+        $news = new BreakingNew();
         $file = $request->file('foto');
-        $nombre =  time()."_".$file->getClientOriginalName();
-        $news->title=$request->txtTitulo;
-        $news->description=$request->txtDescripcion;
-        $news->category_id=$request->category_id;
-        $imagenes = $request->file('foto')->storeAs('public/uploads',$nombre);
+        $nombre =  time() . "_" . $file->getClientOriginalName();
+        $news->title = $request->txtTitulo;
+        $news->description = $request->txtDescripcion;
+        $news->category_id = $request->category_id;
+        $imagenes = $request->file('foto')->storeAs('public/uploads', $nombre);
         $url = Storage::url($imagenes);
-        File::create(['url'=>$url]);
-        $news->image_new=$url;
+        File::create(['url' => $url]);
+        $news->image_new = $url;
 
         $news->save();
 
@@ -63,9 +64,17 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function showMain()
+    {
+        $news = DB::table('breaking_news')
+            ->join('categories', 'categories.id', '=', 'breaking_news.category_id')
+            ->select(DB::raw('*'))
+            ->get();
+        return view('main', ['news' => $news]);
+    }
     public function show($id)
     {
-        //
+   
     }
 
     /**
