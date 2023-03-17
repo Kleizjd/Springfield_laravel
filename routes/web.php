@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\VehiclesController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,8 +32,8 @@ Route::post('/config',[SettingsController::class, 'update'])->name('settings-upd
 Route::get('/news',[NewsController::class, 'index'])->name('news');
 Route::post('/news',[NewsController::class, 'store'])->name('news');
 // MAIN
-Route::get('/',[MainController::class, 'index'])->name('main');
-Route::post('/',[MainController::class, 'store'])->name('main');
+// Route::get('/',[MainController::class, 'index'])->name('main');
+// Route::post('/',[MainController::class, 'store'])->name('main');
 // VEHICLES
 Route::get('/vehicles',[VehiclesController::class, 'index'])->name('vehicles');
 Route::post('/vehicles',[VehiclesController::class, 'store'])->name('vehicles');
@@ -46,3 +47,7 @@ Route::delete('/categories/{id}',[CategoriesController::class, 'destroy'])->name
 // Route::get('/tasks/{id}',[TodosController::class, 'show'])->name('todos-edit');
 // Route::patch('/tasks/{id}',[TodosController::class, 'update'])->name('todos-update');
 // Route::delete('/tasks/{id}',[TodosController::class, 'destroy'])->name('todos-destroy');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
