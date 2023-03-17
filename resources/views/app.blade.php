@@ -58,13 +58,28 @@
                         </li>
                     @endif
                 @else
+                    <li>
+                        <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10">
+
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }}
+                            <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg"
+                                alt="user" class="img-circle" width="60">
                         </a>
 
+
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                            <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10">
+                                <a href="{{ route('settings') }}"">
+                                    <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg"
+                                        alt="user" class="img-circle" width="60">
+                                </a>
+                                <div class="m-l-10"><h7 class="m-b-0">{{ Auth::user()->name }}</h7></div>
+                            </div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
