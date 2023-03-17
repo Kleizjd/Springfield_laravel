@@ -91,8 +91,8 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $categories = Category::find($id);
-        $categories->goodNews()->each(function($goodNews){
-            $goodNews->delete();
+        $categories->breakingNews()->each(function($breakingNews){
+            $breakingNews->delete();
         });
         $categories->delete();
         
