@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SettingsController extends Controller
@@ -14,7 +15,6 @@ class SettingsController extends Controller
     public function index()
     {
         return view('settings.index');
-
     }
 
     /**
@@ -46,7 +46,7 @@ class SettingsController extends Controller
      */
     public function show($id)
     {
-        //
+     
     }
 
     /**
@@ -69,7 +69,14 @@ class SettingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->img_user = $request->img_user;
+
+        $user->save();
+        return redirect()->route('settings.index');
     }
 
     /**

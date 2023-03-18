@@ -22,7 +22,7 @@
             height: auto
         }
     </style>
-    <title>Vehicles</title>
+    <title>@yield('title')</title>
 </head>
 
 <body>

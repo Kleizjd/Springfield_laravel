@@ -20,6 +20,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+// ___________________________________________________________________
+// Route::resource('settings', SettingsController::class);
+// // // NEWS
+// Route::resource('news', NewsController::class);
+// // MAIN
+// Route::get('/main',[NewsController::class, 'main'])->name('main');
+// // CATEGORY
+// Route::resource('categories', CategoriesController::class);
+// ____________________________________________________________________
+
 // SETTINGS
 Route::get('/settings',[SettingsController::class, 'index'])->name('settings');
 Route::post('/settings',[SettingsController::class, 'store'])->name('settings');
@@ -28,7 +38,7 @@ Route::post('/settings',[SettingsController::class, 'update'])->name('settings-u
 // NEWS
 Route::get('/news',[NewsController::class, 'index'])->name('news');
 Route::post('/news',[NewsController::class, 'store'])->name('news');
-Route::get('/main',[NewsController::class, 'showMain'])->name('main');
+Route::get('/main',[NewsController::class, 'main'])->name('main');
 // MAIN
 // Route::get('/',[MainController::class, 'index'])->name('main');
 // Route::post('/',[MainController::class, 'store'])->name('main');

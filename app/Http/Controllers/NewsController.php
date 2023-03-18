@@ -64,7 +64,7 @@ class NewsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function showMain()
+    public function main()
     {
         $news = DB::table('breaking_news')
             ->join('categories', 'categories.id', '=', 'breaking_news.category_id')
