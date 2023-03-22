@@ -57,5 +57,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 // Correo
-// Route:: get('contactanos', [ContactUsController::class, 'index'])->name('contactanos.index');
+Route:: get('contactanos', [ContactUsController::class, 'index'])->name('contactanos.index');
 Route:: post('contactanos', [ContactUsController::class, 'store'])->name('contactanos.store');

@@ -10,7 +10,7 @@
     <h1>Correo electronico</h1>
     <p>Este correo que mandare por laralavel es del segundo proyecto personal que estoy realizando</p>
     {{-- <p><strong>Nombre: </strong>{{$contacto['name']}}</p> --}}
-    {{-- <p><strong>Correo: </strong>{{$contacto['correo']}}</p> --}}
+    <p><strong>Correo: </strong>{{$contacto['email']}}</p>
     {{-- <p><strong>Mensaje: </strong>{{$contacto['mensaje']}}</p> --}}
 </body>
 </html>

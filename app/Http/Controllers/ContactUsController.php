@@ -39,10 +39,12 @@ class ContactUsController extends Controller
             
         // ]);
         // $request->validate(['correo' => 'required|email','mensaje' => 'required' ]);
-        $correo = new ContactUsMailable($request->all());
-        Mail::to("jose.jdgo97@gmail.com")->send($correo);
-        return 'Mensaje enviado';
-        // return redirect()->route('home')->with('info', 'Mensaje enviado');
+        $correo = new ContactUsMailable($request->all()); 
+        // dd($request->all());
+        Mail::to($request->email)->send($correo);
+       
+        // return 'Mensaje enviado';
+        return redirect()->route('contactanos.index')->with('info', 'Mensaje enviado');
 
     }
 
