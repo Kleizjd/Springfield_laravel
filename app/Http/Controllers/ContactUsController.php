@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Mail\ContactUsMailable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
-class SettingsController extends Controller
+class ContactUsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('settings.index');
+        return view('contactanos.index');
     }
 
     /**
@@ -27,22 +28,24 @@ class SettingsController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   
     public function store(Request $request)
-    {
-        //
-    }
     // public function store(StoreContact $request)
-    // {
-    //     $correo = new ContactanosMailable($request->all());
-    //     Mail::to("jose.jdgo97@gmail.com")->send($correo);
-    //     return redirect()->route('contactanos.index')->with('info', 'Mensaje enviado');
-    // }
+    {
+        // $request->validate([
+        //     'name' => 'required',
+        //     'correo' => 'required|email',
+        //     'mensaje' => 'required',
+            
+        // ]);
+        // $request->validate(['correo' => 'required|email','mensaje' => 'required' ]);
+        $correo = new ContactUsMailable($request->all());
+        Mail::to("jose.jdgo97@gmail.com")->send($correo);
+        return 'Mensaje enviado';
+        // return redirect()->route('home')->with('info', 'Mensaje enviado');
+
+    }
+
     /**
      * Display the specified resource.
      *
@@ -51,7 +54,7 @@ class SettingsController extends Controller
      */
     public function show($id)
     {
-     
+        //
     }
 
     /**
@@ -74,14 +77,7 @@ class SettingsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->img_user = $request->img_user;
-
-        $user->save();
-        return redirect()->route('settings.index');
+        //
     }
 
     /**
