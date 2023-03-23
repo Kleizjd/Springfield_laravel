@@ -13,6 +13,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script> --}}
     @vite(['resources/js/app.js'])
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <style>
         .img-circle {
             border-radius: 100%
@@ -33,8 +34,7 @@
         <div class="container-fluid">
             <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">
                 <span>
-                    <img src="http://localhost/WWW/Springfield_News/public/img/logo.jpg" alt="ingesoftware"
-                        height="50" width="200">
+                    <img src="http://localhost/WWW/Springfield_News/public/img/logo.jpg" height="50" width="200">
                 </span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

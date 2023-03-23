@@ -1,10 +1,5 @@
 <?php
 
-use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\ContactUsController;
-use App\Http\Controllers\NewsController;
-use App\Http\Controllers\SettingsController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,19 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// ___________________________________________________________________
-// Route::resource('settings', SettingsController::class);
-// // // NEWS
-// Route::resource('news', NewsController::class);
-// // MAIN
-// Route::get('/main',[NewsController::class, 'main'])->name('main');
-// // CATEGORY
-// Route::resource('categories', CategoriesController::class);
-// ____________________________________________________________________
-// $this->middleware('auth');
+Route::get('/', function () {
+    return view('welcome');
+});
+
 // SETTINGS
 Route::get('/settings',[SettingsController::class, 'index'])->name('settings')->middleware('auth');
 Route::post('/settings',[SettingsController::class, 'store'])->name('settings')->middleware('auth');
@@ -54,8 +40,3 @@ Route::delete('/categories/{id}',[CategoriesController::class, 'destroy'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-// Correo
-Route:: get('contactanos', [ContactUsController::class, 'index'])->name('contactanos.index');
-Route:: post('contactanos', [ContactUsController::class, 'store'])->name('contactanos.store');

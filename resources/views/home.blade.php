@@ -1,4 +1,5 @@
 @extends('app')
+{{-- @extends('layouts.app') --}}
 
 @section('content')
 <div class="container">
@@ -20,8 +21,4 @@
         </div>
     </div>
 </div>
-@if (session('info'))
-<script>alert("{{ session('info')}}")</script>
-    
-@endif
 @endsection
