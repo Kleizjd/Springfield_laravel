@@ -36,7 +36,7 @@
                             <div class="form-group">
                                 <label for="category_id">Category<span class="required">*</span></label>
                                 <select name="category_id" class="form-control selectpicker" id="categoria" name="categoria"
-                                    required>
+                                    >
                                     <option value="">Seleccione ...</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -44,7 +44,9 @@
 
                                 </select>
                             </div>
-
+                            @error('category_id')
+                            <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         </div>
                         <div class="col-md-6">
                             <div class="photo">
@@ -56,7 +58,7 @@
                                         src="http://127.0.0.1:8000/storage/uploads/portada_noticia.png">
                                     <input id="seleccionArchivos" name="foto" type="file" accept="image/*" />
                                 </div>
-
+                             
                                 @error('foto')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror

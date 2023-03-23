@@ -39,9 +39,9 @@ class ContactUsController extends Controller
             
         // ]);
         // $request->validate(['correo' => 'required|email','mensaje' => 'required' ]);
-        $correo = new ContactUsMailable($request->all()); 
+        // $correo = new ContactUsMailable($request->all()); 
         // dd($request->all());
-        Mail::to($request->email)->send($correo);
+        // Mail::to($request->email)->send($correo);
        
         // return 'Mensaje enviado';
         return redirect()->route('contactanos.index')->with('info', 'Mensaje enviado');

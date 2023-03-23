@@ -40,7 +40,7 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(['foto' => 'required|image|max:2048']);
+        $request->validate(['foto' => 'required|image|max:2048', 'category_id'=>'required']);
 
         $news = new BreakingNew();
         $file = $request->file('foto');
