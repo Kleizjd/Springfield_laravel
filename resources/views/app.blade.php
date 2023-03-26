@@ -13,7 +13,6 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script> --}}
     @vite(['resources/js/app.js'])
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
     <style>
         .img-circle {
             border-radius: 100%
@@ -38,7 +37,7 @@
             {{-- !SIDEBAR --}}
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 <div
-                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-5 pb-2 mb-3 border-bottom">
+                    class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-2 pb-2 mb-3 border-bottom">
                     @yield('content')
                 </div>
             </main>

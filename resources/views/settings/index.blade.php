@@ -101,14 +101,12 @@
 
                                         <form action="{{ route('password-update') }}" method="POST">
                                             @csrf
-                                            {{-- @if (session('success'))
-                                                <div class="alert alert-success" role="alert">
-                                                    {{ session('success') }}
+                                            @if (session('error'))
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ session('error') }}
                                                 </div>
                                             @endif
-                                            @error('password')
-                                                <h6 class="alert alert-danger">{{ $message }}</h6>
-                                            @enderror --}}
+
                                             <div class="form-group">
                                                 <label for="email"><strong>Password:</strong></label>
                                                 <input type="password" class="form-control" id="old_password"
@@ -121,8 +119,8 @@
                                             </div>
                                             <div class="form-group mb-2">
                                                 <label for="password_confirm"><strong>Password Confirm:</strong></label>
-                                                <input type="password" class="form-control" id="password_confirm"
-                                                    name="password_confirm">
+                                                <input type="password" class="form-control" id="password_confirmed"
+                                                    name="password_confirmed">
                                             </div>
                                             <button class="btn btn-primary" type="submit">Update Password</button>
                                         </form>

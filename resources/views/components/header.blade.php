@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="./">
             <span>
-                <img src="http://localhost/WWW/Springfield_News/public/img/logo.jpg" height="50" width="200">
+                <img src="{{ asset('storage/uploads/logo.jpg') }}" height="50" width="200">
             </span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -39,7 +39,7 @@
                             <img src="{{ asset(Auth::user()->photo) }}" id="perfil2" alt="user" class="img-circle"
                                 width="60">
                         @else
-                            <img src="http://127.0.0.1:8000/storage/svg/upload-user.svg" alt="user" class="img-circle"
+                            <img src="{{ asset('storage/svg/upload-user.svg') }}" alt="user" class="img-circle"
                                 width="60">
                         @endif
 
@@ -52,7 +52,7 @@
                                     <img src="{{ asset(Auth::user()->photo) }}" id="perfil2" alt="user"
                                         class="img-circle" width="60">
                                 @else
-                                    <img src="{{ asset('/svg/upload-user.svg') }}" alt="user" class="img-circle"
+                                    <img src="{{ asset('storage/svg/upload-user.svg') }}" alt="user" class="img-circle"
                                         width="60">
                                 @endif
                             </a>

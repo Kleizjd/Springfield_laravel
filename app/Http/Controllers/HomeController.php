@@ -58,20 +58,32 @@ class HomeController extends Controller
     }
 
     public function passwordUpdate(Request $request)
-    {   dd($request);
+    {   
+        // dd($request);
         $request->validate([
-            'old_password' => 'required|confirmed|min:8|max:32',
-            'new_password' => 'required|confirmed|min:8|max:32',
-            'password_confirmed' => 'required|confirmed|min:8|max:32'
+            'old_password' => 'required|min:8|max:32',
+            'new_password' => 'required|min:8|max:32',
+            'password_confirmed' => 'required|min:8|max:32'
         ]);
+        // $this->validate($request, [ 
+        //     'old_password' => 'required|min:8|max:32',
+        //     'new_password' => 'required|min:8|max:32',
+        //     'password_confirmed' => 'required|min:8|max:32'
+        // ]);
         #Match The Old Password
-        if (!Hash::check($request->old_password, auth()->user()->password)) {
+        // if (!Hash::check($request->old_password, auth()->user()->password)) {
+            $hashedPassword = Auth::user()->password;
+        if (!Hash::check($request->old_password , $hashedPassword)) {
             return back()->with("error", "Old Password Doesn't match!");
         }
-        if($request->new_password === $request->password_confirm){
+        if($request->new_password === $request->password_confirmed){
              #Update the new Password
             User::whereId(auth()->user()->id)->update(['password' => Hash::make($request->new_password) ]);
+            return back()->with("status", "Password changed successfully!");
+
+        } else{
+            return back()->with("error", "Password the password is no the same!");
+
         }
-        return back()->with("status", "Password changed successfully!");
     }
 }
