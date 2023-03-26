@@ -43,11 +43,12 @@ class NewsController extends Controller
         $request->validate(['foto' => 'required|image|max:2048', 'category_id'=>'required']);
 
         $news = new BreakingNew();
-        $file = $request->file('foto');
-        $nombre =  time() . "_" . $file->getClientOriginalName();
         $news->title = $request->txtTitulo;
         $news->description = $request->txtDescripcion;
         $news->category_id = $request->category_id;
+        // UPLOAD IMAGES
+        $file = $request->file('foto');
+        $nombre =  time() . "_" . $file->getClientOriginalName();
         $imagenes = $request->file('foto')->storeAs('public/uploads', $nombre);
         $url = Storage::url($imagenes);
         File::create(['url' => $url]);

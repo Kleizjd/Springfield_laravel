@@ -40,8 +40,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="name"><strong>Name:</strong></label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ Auth::user()->name }}">
+                            <input type="text" class="form-control" id="name" name="name" value="{{ Auth::user()->name }}">
                         </div>
                         <div class="form-group">
                             <label for="email"><strong>Email:</strong></label>

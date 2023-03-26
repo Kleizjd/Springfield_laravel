@@ -5,9 +5,8 @@
                 <img src="http://localhost/WWW/Springfield_News/public/img/logo.jpg" height="50" width="200">
             </span>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -36,7 +35,8 @@
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{-- <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg" alt="user" class="img-circle" width="60"> --}}
-                        <img src="{{ asset(Auth::user()->image_user) }}" alt="user" class="img-circle" width="60">
+                        <img src="{{ asset(Auth::user()->photo) }}" alt="user" id="perfil" class="img-circle"
+                            width="60">
 
                     </a>
 
@@ -44,13 +44,21 @@
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
 
                         <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10">
-                            <a href="{{ route('settings') }}"">
-                                {{-- <img src="{{ asset(Auth::user()->image_user) }}" alt="user" class="img-circle" width="60"> --}}
-                                <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg" alt="user" class="img-circle" width="60">
+                            <a href="{{ route('settings') }}">
+                                @if (!empty(Auth::user()->photo))
+                                    <img src="{{ asset(Auth::user()->photo) }}" id="perfil2" alt="user"
+                                        class="img-circle" width="60">
+                                @else
+                                    <img src="http://127.0.0.1:8000/storage/svg/upload-user.svg" alt="user"
+                                        class="img-circle" width="60">
+                                @endif
                             </a>
-                            <div class="m-l-10"><h7 class="m-b-0">{{ Auth::user()->name }}</h7></div>
+                            <div class="m-l-10">
+                                <h7 class="m-b-0">{{ Auth::user()->name }}</h7>
+                            </div>
                         </div>
-                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 

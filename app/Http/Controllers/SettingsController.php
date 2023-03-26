@@ -14,8 +14,8 @@ class SettingsController extends Controller
      */
     public function index()
     {
-        return view('settings.config');
-        // return view('settings.index');
+        // return view('settings.config');
+        return view('settings.index');
     }
 
     /**
@@ -79,8 +79,8 @@ class SettingsController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->img_user = $request->img_user;
-
+        $user->photo = $request->photo;
+        dd($user);
         $user->save();
         return redirect()->route('settings.index');
     }

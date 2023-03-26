@@ -1,6 +1,5 @@
 @extends('app')
 @section('content')
-
     <div class="container-fluid">
         <div class="card shadow-lg mt-2">
             <div class="badge bg-dark card-header">
@@ -19,119 +18,108 @@
                 <div class="card-block">
                     <div class="tab-content">
                         <div class="tab-pane active">
-                            <div class="container-fluid">
+                            <div class="tab-pane active">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>
+                                                    {{ $error }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+                                @if (session()->get('message'))
+                                    <div class="alert alert-success" role="alert">
+                                        <strong>Success: </strong>{{ session()->get('message') }}
+                                    </div>
+                                @endif
+
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="card-header">
 
-                                            <form action="">
-
-                                                <div class="font-weight-bold">Juan David Grijalba Osorio</div>
-                                                {{-- <input type="hidden" name="userId" id="userId" value="1"> --}}
+                                    <div class="col-6">
+                                        <form action="{{ route('home') }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            <div class="card-header text-center">
+                                                <div class="font-weight-bold">{{ Auth::user()->name }}'s Profile
+                                                </div>
                                                 <div
-                                                    class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
+                                                    class="img__wrap border btn btn-outline-white d-flex justify-content-center">
+                                                    <label for="photo">
+                                                        <?php if (!empty(Auth::user()->photo)) : ?>
+                                                        <i class="far fa-edit img__description">Cambiar</i>
+                                                        <div
+                                                            class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
+                                                            <img class="img-responsive" id="img_preview"
+                                                                src="{{ asset(Auth::user()->photo) }}" height="190"
+                                                                width="190">
+                                                        </div>
+                                                        <?php else : ?>
+                                                        <i class="far fa-edit img__description">Cambiar</i>
+                                                        <div
+                                                            class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
+                                                            <img class="img-responsive" id="img_preview"
+                                                                src="http://127.0.0.1:8000/storage/svg/upload-user.svg"
+                                                                height="190" width="190">
+                                                        </div>
+                                                        <?php endif; ?>
 
-                                                    <i class="shadow-hover-efect"></i>
-                                                    <!-- <img class="img__img" src="../../public/img/svg/upload-user.svg" /> -->
-                                                    <img class=""
-                                                        src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg"
-                                                        alt="juan_david-73" height="190" width="190">
-                                                    <i class="far fa-edit img__description">Cambiar</i>
-                                                </div>
-
-
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm">
-                                        <div class="row ">
-                                            <div class="col-sm col-lg"><label for="email_user">Correo
-                                                    Electronico</label></div>
-                                            <div class="col-sm col-lg" id="email_user">
-                                                <span>jose@gmail.com</span>
-                                            </div>
-                                            <div class="col-sm col-lg">
-                                                <button class="btn btn-primary" data-toggle="modal"
-                                                    data-target="#emailModal">cambiar</button>
-                                            </div>
-                                        </div>
-                                        <div class="row ">
-                                            <div class="col-sm col-lg">
-                                                <span>Nombre</span>
-                                            </div>
-                                            <div class="col-sm col-lg">
-                                                <div id="complete_name_field">juan osorio</div>
-                                            </div>
-                                            <div class="col-sm col-lg">
-                                                <button class="btn btn-primary" id="editName">cambiar</button>
-
-                                            </div>
-                                        </div>
-                                        <form action="" id="form_editName" method="POST" style="display: none;"
-                                            autocomplete="off">
-                                            <div class="row ">
-                                                <div class="col-sm-2 col-lg-2">
-                                                    <label class="pt-2" for="names">Nombre</label>
-                                                </div>
-                                                <div class="col-sm-4 col-lg-4">
-                                                    <input type="text" class="form-control" name="name_user"
-                                                        id="name_user" value="juan">
-                                                </div>
-                                                <div class="col-sm-2 col-lg-2">
-                                                    <label class="pt-2" for="lastName">Apellidos</label>
-                                                </div>
-                                                <div class="col-sm-4 col-lg-4">
-                                                    <input type="text" class="form-control" name="lastName"
-                                                        id="lastName" value="osorio">
+                                                    </label>
+                                                    <input type="file" name="photo" id="photo" accept="image/*"
+                                                        style="display: none;">
+                                                    @error('photo')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                                 </div>
 
                                             </div>
-                                            <div class="row pt-3 justify-content-end">
-                                                <div class="col-m col-lg ">
-                                                    <input type="button" class="btn btn-secondary" id="cancelEditName"
-                                                        value="Cancelar">
-                                                </div>
-
+                                            <div class="form-group">
+                                                <label for="name"><strong>Name:</strong></label>
+                                                <input type="text" class="form-control" id="name" name="name"
+                                                    value="{{ Auth::user()->name }}">
                                             </div>
-                                        </form>
-                                        <form action="" method="post" id="form_Edit_Password">
-
-                                            <div class="row pt-3">
-                                                <div class="col-sm col-lg"><label for="actual_password">Actual
-                                                        Contraseña</label></div>
-                                                <div class="col-sm col-lg"><input type="password" name="actual_password"
-                                                        id="actual_password" class="form-control" required=""></div>
-
+                                            <div class="form-group">
+                                                <label for="email"><strong>Email:</strong></label>
+                                                <input type="text" class="form-control" id="email"
+                                                    value="{{ Auth::user()->email }}" name="email">
                                             </div>
-                                            <div class="row pt-3">
-                                                <div class="col-sm col-lg"><label for="new_password"></label>Nueva
-                                                    Contraseña</div>
-                                                <div class="col-sm col-lg"><input type="password" name="new_password"
-                                                        id="new_password" class="form-control" required=""></div>
-
-                                            </div>
-                                            <div class="row pt-3">
-
-                                                <div class="col-sm col-lg"><label for="confirm_password"></label>Confirmar
-                                                    Contraseña
-                                                </div>
-                                                <div class="col-sm col-lg"><input type="password" name="confirm_password"
-                                                        id="confirm_password" class="form-control" required=""></div>
-
-                                            </div>
-                                            <div class="row pt-3">
-                                                <div class="col-sm col-lg d-flex justify-content-center">
-                                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                                </div>
-                                            </div>
+                                            <button class="btn btn-primary" type="submit">Update Profile</button>
                                         </form>
                                     </div>
+                                    <div class="col">
+                                        <form action="{{ route('password-update') }}" method="POST"
+                                            enctype="multipart/form-data">
 
+                                            <div class="form-group">
+                                                <label for="email"><strong>Password:</strong></label>
+                                                <input type="password" class="form-control" id="old_password"
+                                                    name="old_password">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="new_password"><strong>New password:</strong></label>
+                                                <input type="password" class="form-control" id="new_password"
+                                                    name="new_password">
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="password_confirm"><strong>Password Confirm:</strong></label>
+                                                <input type="password" class="form-control" id="password_confirm"
+                                                    name="password_confirm">
+                                            </div>
+                                            <button class="btn btn-primary" type="submit">Update Password</button>
+                                        </form>
+
+                                    </div>
                                 </div>
+
+
+
+
 
 
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -139,3 +127,30 @@
     </div>
 
 @endsection
+<script>
+    // Obtener referencia al input y a la imagen
+    window.onload = function() {
+        const $seleccionArchivos = document.querySelector("#photo"),
+            $imagenPrevisualizacion = document.querySelector("#img_preview");
+
+        // Escuchar cuando cambie
+        $seleccionArchivos.addEventListener("change", () => {
+            // Los archivos seleccionados, pueden ser muchos o uno
+            const archivos = $seleccionArchivos.files;
+            // Si no hay archivos salimos de la función y quitamos la imagen
+            if (!archivos || !archivos.length) {
+                $imagenPrevisualizacion.src = "";
+                return;
+            }
+            // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+            const primerArchivo = archivos[0];
+            // Lo convertimos a un objeto de tipo objectURL
+            const objectURL = URL.createObjectURL(primerArchivo);
+            // Y a la fuente de la imagen le ponemos el objectURL
+            $imagenPrevisualizacion.src = objectURL;
+            document.getElementById("perfil").src = objectURL;
+            document.getElementById("perfil2").src = objectURL;
+
+        });
+    }
+</script>

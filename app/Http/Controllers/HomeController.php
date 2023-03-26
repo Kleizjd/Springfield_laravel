@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -28,18 +30,49 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    public function profileUpdate(Request $request){
+    public function profileUpdate(Request $request)
+    {
         //validation rules
 
         $request->validate([
-            'name' =>'required|min:4|string|max:255',
-            'email'=>'required|email|string|max:255'
+            // 'photo'=> 'required|image|max:2048',
+            'name' => 'required|min:4|string|max:255',
+            'email' => 'required|email|string|max:255',
         ]);
         // $user = new User();
-        $user =Auth::user();
+        $user = Auth::user();
         $user->name = $request['name'];
-        $user->email = $request['email'];
+        $user->email = $request['email'];      
+
+        // UPLOAD IMAGES
+        $file = $request->file('photo');
+        if (!empty($file)) {
+            $nombre =  time() . "_" . $file->getClientOriginalName();
+            $imagenes = $file->storeAs('public/uploads', $nombre);
+            $url = Storage::url($imagenes);
+            File::create(['url' => $url]);
+            $user->photo = $url;
+        }
         $user->save();
-        return back()->with('message','Profile Updated');
+        return back()->with('message', 'Profile Updated');
+    }
+
+    public function passwordUpdate(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required|confirmed',
+            'new_password' => 'required|confirmed|min:8|max:32',
+            'password_confirmed' => 'required|confirmed|min:8|max:32'
+        ]);
+        #Match The Old Password
+        if (!Hash::check($request->old_password, auth()->user()->password)) {
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+        if($request->new_password === $request->password_confirm){
+             #Update the new Password
+            User::whereId(auth()->user()->id)->update(['password' => Hash::make($request->new_password) ]);
+            return true;
+        }
+       
     }
 }

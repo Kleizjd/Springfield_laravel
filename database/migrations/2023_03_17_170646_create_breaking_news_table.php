@@ -18,6 +18,10 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('image_new');
+            $table->bigInteger('category_id')->unsigned();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')->after('title');
             $table->timestamps();
         });
     }
