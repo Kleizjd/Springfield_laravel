@@ -23,7 +23,6 @@ return new class extends Migration
                 ->references('id')
                 ->on('categories')->after('title');
             $table->timestamps();
-            $table->timestamps();
         });
     }
 

@@ -155,10 +155,10 @@
                                                 <th>ID</th>
                                                 <th>Correo</th>
                                                 <th>Nombre Completo</th>
-                                                <!-- <th>Estado</th> -->
+                                                <th>Estado</th>
                                                 <th>Rol</th>
                                                 <th>Ver</th>
-                                                <th>Editar</th>
+                                                <th>Acciones</th>
 
                                             </tr>
                                         <tbody>
@@ -167,10 +167,27 @@
                                                     <td>{{ $user->name }}</td>
                                                     <td>{{ $user->email }}</td>
                                                     <td>{{ $user->name }}</td>
-                                                    <!-- <td>Estado</td> -->
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{ $user->status }}</td>
+                                                    <td>{{ $user->rol }}</td>
+                                                    <td>
+                                                        <form action="#" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="button" class="text-white btn btn-info"><i class="fa fa-eye"></i></button>
+                                                        </form>
+                                                    </td>
+                                                    <td>
+                                                        {{-- <form action="{{ route('user.edit', $user->id) }}" method="POST"> --}}
+                                                        <form action="#" method="POST">
+                                                            {{-- <a href="#" class="btn btn-info">Editar</a> --}}
+                                                            <button type="button" class="text-white btn btn-warning"><i
+                                                                    class="fa fa-edit"></i></button>
+                                                            {{-- <a href="/user/{{ $user->id}}/edit" class="btn btn-info">Editar</a> --}}
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">Borrar</button>
+                                                        </form>
+                                                    </td>
 
                                                 </tr>
                                             @endforeach
