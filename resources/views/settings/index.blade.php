@@ -39,6 +39,16 @@
                                 <div class="row">
 
                                     <div class="col-6">
+                                        @if (session('status'))
+                                            <div class="alert alert-success" role="alert">
+                                                {{ session('status') }}
+                                            </div>
+                                        @endif
+                                        @if ($message = Session::get('success'))
+                                            <div class="alert alert-success">
+                                                <p>{{ $message }}</p>
+                                            </div>
+                                        @endif
                                         <form action="{{ route('home') }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             <div class="card-header text-center">
@@ -88,9 +98,17 @@
                                         </form>
                                     </div>
                                     <div class="col">
-                                        <form action="{{ route('password-update') }}" method="POST"
-                                            enctype="multipart/form-data">
 
+                                        <form action="{{ route('password-update') }}" method="POST">
+                                            @csrf
+                                            {{-- @if (session('success'))
+                                                <div class="alert alert-success" role="alert">
+                                                    {{ session('success') }}
+                                                </div>
+                                            @endif
+                                            @error('password')
+                                                <h6 class="alert alert-danger">{{ $message }}</h6>
+                                            @enderror --}}
                                             <div class="form-group">
                                                 <label for="email"><strong>Password:</strong></label>
                                                 <input type="password" class="form-control" id="old_password"
@@ -111,12 +129,6 @@
 
                                     </div>
                                 </div>
-
-
-
-
-
-
                             </div>
                         </div>
 

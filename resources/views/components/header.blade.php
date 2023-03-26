@@ -34,23 +34,26 @@
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        {{-- <img src="http://localhost/WWW/Springfield_News/views/perfil/Files/juan_david-73.jpg" alt="user" class="img-circle" width="60"> --}}
-                        <img src="{{ asset(Auth::user()->photo) }}" alt="user" id="perfil" class="img-circle"
-                            width="60">
+                       
+                        @if (!empty(Auth::user()->photo))
+                            <img src="{{ asset(Auth::user()->photo) }}" id="perfil2" alt="user" class="img-circle"
+                                width="60">
+                        @else
+                            <img src="http://127.0.0.1:8000/storage/svg/upload-user.svg" alt="user" class="img-circle"
+                                width="60">
+                        @endif
+
 
                     </a>
-
-
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-
                         <div class="d-flex no-block align-items-center p-15 bg-dark text-white m-b-10">
                             <a href="{{ route('settings') }}">
                                 @if (!empty(Auth::user()->photo))
                                     <img src="{{ asset(Auth::user()->photo) }}" id="perfil2" alt="user"
                                         class="img-circle" width="60">
                                 @else
-                                    <img src="http://127.0.0.1:8000/storage/svg/upload-user.svg" alt="user"
-                                        class="img-circle" width="60">
+                                    <img src="{{ asset('/svg/upload-user.svg') }}" alt="user" class="img-circle"
+                                        width="60">
                                 @endif
                             </a>
                             <div class="m-l-10">

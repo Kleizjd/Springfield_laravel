@@ -58,9 +58,9 @@ class HomeController extends Controller
     }
 
     public function passwordUpdate(Request $request)
-    {
+    {   dd($request);
         $request->validate([
-            'old_password' => 'required|confirmed',
+            'old_password' => 'required|confirmed|min:8|max:32',
             'new_password' => 'required|confirmed|min:8|max:32',
             'password_confirmed' => 'required|confirmed|min:8|max:32'
         ]);
@@ -71,8 +71,7 @@ class HomeController extends Controller
         if($request->new_password === $request->password_confirm){
              #Update the new Password
             User::whereId(auth()->user()->id)->update(['password' => Hash::make($request->new_password) ]);
-            return true;
         }
-       
+        return back()->with("status", "Password changed successfully!");
     }
 }

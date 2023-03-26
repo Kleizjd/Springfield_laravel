@@ -50,14 +50,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="photo">
+                                <label for="foto">Foto (570x380)</label>
                                 <div class="prevPhoto">
                                     <span class="delPhoto notBlock">X</span>
-                                    <label for="foto">
-                                        <img id="img_preview" class="img-responsive"
+                                    <label for="foto"></label>
+                                    <img id="img_preview" class="img-responsive"
                                         src="http://127.0.0.1:8000/storage/uploads/portada_noticia.png">
                                     <input id="seleccionArchivos" name="foto" type="file" accept="image/*" />
-                                    </label>
-                                 
                                 </div>
                              
                                 @error('foto')

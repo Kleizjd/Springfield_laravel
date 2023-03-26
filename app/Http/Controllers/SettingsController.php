@@ -79,8 +79,8 @@ class SettingsController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = $request->password;
-        $user->photo = $request->photo;
-        dd($user);
+        $user->img_user = $request->img_user;
+
         $user->save();
         return redirect()->route('settings.index');
     }
