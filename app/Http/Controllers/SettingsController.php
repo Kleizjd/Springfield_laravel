@@ -15,7 +15,8 @@ class SettingsController extends Controller
     public function index()
     {
         // return view('settings.config');
-        return view('settings.index');
+        $users = User::all();
+        return view('settings.index', ['users'=>$users]);
     }
 
     /**
