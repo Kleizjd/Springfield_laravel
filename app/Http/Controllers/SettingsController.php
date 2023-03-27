@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\File;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class SettingsController extends Controller
 {
@@ -16,7 +20,7 @@ class SettingsController extends Controller
     {
         // return view('settings.config');
         $users = User::all();
-        return view('settings.index', ['users'=>$users]);
+        return view('settings.index', ['users' => $users]);
     }
 
     /**
@@ -37,7 +41,29 @@ class SettingsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'email2' => 'required|email|unique:users,email|string|max:255',
+            'password_user' => 'required',
+            'password_confirm' => 'required|same:password_user',
+            'rol' => 'required'
+        ]);
+        $user = new User();
+        $user->name = $request->nombre;
+        $user->email = $request->email2;
+        $user->password = Hash::make($request->password_user);
+        $user->rol = $request->rol;
+        // UPLOAD IMAGES
+        // $file = $request->file('photo');
+        // if (!empty($file)) {
+        //     $nombre =  time() . "_" . $file->getClientOriginalName();
+        //     $imagenes = $file->storeAs('public/uploads', $nombre);
+        //     $url = Storage::url($imagenes);
+        //     File::create(['url' => $url]);
+        //     $user->photo = $url;
+        // }
+        $user->save();
+        return back()->with('message', 'User Created');
     }
     // public function store(StoreContact $request)
     // {
@@ -53,7 +79,6 @@ class SettingsController extends Controller
      */
     public function show($id)
     {
-     
     }
 
     /**

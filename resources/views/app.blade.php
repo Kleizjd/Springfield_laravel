@@ -12,7 +12,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script> --}}
-    
+       <!-- CSRF Token -->
+       <meta name="csrf-token" content="{{ csrf_token() }}">   
+       <!-- Fonts -->
+       <link rel="dns-prefetch" href="//fonts.gstatic.com">
+       <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+   
+       <!-- Scripts -->
     @vite(['resources/js/app.js'])
     <style>
         .img-circle {

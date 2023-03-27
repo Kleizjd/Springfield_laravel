@@ -29,9 +29,9 @@ Route::get('/vista', function () {
 })->name('vista');
 // SETTINGS
 Route::get('settings',[SettingsController::class, 'index'])->name('settings')->middleware('auth');
-Route::post('settings',[SettingsController::class, 'store'])->name('settings')->middleware('auth');
-Route::post('settings',[SettingsController::class, 'show'])->name('settings-edit')->middleware('auth');
-Route::post('settings',[SettingsController::class, 'update'])->name('settings-update')->middleware('auth');
+Route::post('settings',[SettingsController::class, 'store'])->name('settings.store')->middleware('auth');
+// Route::post('settings',[SettingsController::class, 'show'])->name('settings-edit')->middleware('auth');
+// Route::post('settings',[SettingsController::class, 'update'])->name('settings-update')->middleware('auth');
 
 // NEWS
 Route::get('news',[NewsController::class, 'index'])->name('news')->middleware('auth');

@@ -1,6 +1,6 @@
 @extends('app')
-<!-- Modal Settings -->
-{{-- @include('settings.modal.showUser') --}}
+@section('title', 'Springfield News')
+
 @section('content')
     <div class="container-fluid">
         <div class="card shadow-lg mt-2">
@@ -63,11 +63,8 @@
                                                 <label for="photo">
                                                     <?php if (!empty(Auth::user()->photo)) : ?>
                                                     <i class="far fa-edit img__description">Cambiar</i>
-                                                    <div
-                                                        class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
-                                                        <img class="img-responsive" id="img_preview"
-                                                            src="{{ asset(Auth::user()->photo) }}" height="190"
-                                                            width="190">
+                                                    <div class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
+                                                        <img class="img-responsive" id="img_preview" src="{{ asset(Auth::user()->photo) }}" height="190" width="190">
                                                     </div>
                                                     <?php else : ?>
                                                     <i class="far fa-edit img__description">Cambiar</i>
@@ -112,7 +109,7 @@
                                         @endif
 
                                         <div class="form-group">
-                                            <label for="email"><strong>Password:</strong></label>
+                                            <label for="email"><strong>Current Password:</strong></label>
                                             <input type="password" class="form-control" id="old_password"
                                                 name="old_password">
                                         </div>
@@ -122,7 +119,7 @@
                                                 name="new_password">
                                         </div>
                                         <div class="form-group mb-2">
-                                            <label for="password_confirm"><strong>Password Confirm:</strong></label>
+                                            <label for="password_confirm"><strong>Confirm Password:</strong></label>
                                             <input type="password" class="form-control" id="password_confirmed"
                                                 name="password_confirmed">
                                         </div>
@@ -137,7 +134,7 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
-                                    <div class="newSearch" id="containerModalSearchProduct">
+                                    <div class="newSearch pb-2" id="containerModalSearchProduct">
                                         <h3 class="w-100 modal-title">Búsqueda de usuarios</h3>
 
                                         <button class="btn btn-primary" data-bs-toggle="modal"
@@ -149,7 +146,8 @@
 
                                     <table id="tableSearchUser" class="table-bordered table-hover" width="100%">
 
-                                        <thead class="table text-white bg-primary thead-primary">
+                                        <thead id="table_usuarios" class="table text-white bg-primary thead-primary">
+                                            <thead class="bg-primary  text-white">
 
                                             <tr>
                                                 <th>ID</th>
@@ -161,6 +159,7 @@
                                                 <th>Acciones</th>
 
                                             </tr>
+                                            </thead>
                                         <tbody>
                                             @foreach ($users as $user)
                                                 <tr>
@@ -208,7 +207,18 @@
     </div>
 
 @endsection
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+@stop
+@section('js')
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $('#table_usuarios').DataTable({ "lengthMenu": [[5,10,50,1],[5,10,50,'ALL']] });
+    });
     // Obtener referencia al input y a la imagen
     window.onload = function() {
         const $seleccionArchivos = document.querySelector("#photo"),
@@ -233,5 +243,21 @@
             document.getElementById("perfil2").src = objectURL;
 
         });
+         // PONER IMAGEN CUANDO SE CREE UN USUARIO
+        // const $seleccionArchivo = document.querySelector("#photo2"),
+        // $imagenPrevisualiza = document.querySelector("#img_preview2");
+
+        // $seleccionArchivo.addEventListener("change", () => {
+        //     const archivo = $seleccionArchivo.files;
+        //     if (!archivo || !archivo.length) {
+        //         $imagenPrevisualiza.src = "";
+        //         return;
+        //     }
+        //     const sachivo = archivo[1];
+        //     const objtURL = URL.createObjectURL(sachivo);
+        //     $imagenPrevisualiza.src = objtURL;
+        // });
     }
 </script>
+    
+@endsection

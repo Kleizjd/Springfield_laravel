@@ -1,96 +1,137 @@
 <!-- Modal BUSCAR -->
 <div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document" style="max-width: 80%;">
+    <div class="modal-dialog modal-lg" role="document" style="max-width: 50%;">
+        @if (session('status'))
+        <div class="alert alert-success" role="alert">
+            {{ session('status') }}
+        </div>
+        @endif
+        
+        <form action="{{ route('settings.store')}}" method="post" enctype="multipart/form">
+            @csrf
+            <div class="modal-content">
 
-        <div class="modal-content">
-
-            <div class="text-center modal-header">
-                <h3 class="w-100 modal-title">Crear de Usuario</h3>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" title="Cerrar">
-                </button> 
-            </div>
-
-            <div class="card-body">
-                <form method="POST" id="frm_crea_usuario" action="" autocomplete="off">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <input type="text" class="form-control" id="nombre" name="nombre"
-                                            placeholder="Nombre">
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <input type="text" class="form-control" id="apellido" name="apellido"
-                                            placeholder="Apellido">
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <input class="form-control" type="email" name="email" id="email"
-                                            placeholder="Correo Electronico">
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <div class="input-group form-group">
-                                            <input type="password" class="form-control" placeholder="Contrase&ntilde;a"
-                                                name="password_user" id="password_user" required />
-                                            <button type="button" class="btn btn-outline-primary showPassword">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
+                <div class="text-center modal-header">
+                    <h3 class="w-100 modal-title">Crear de Usuario</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Cerrar">
+                    </button>
+                </div>
+    
+                <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                                placeholder="Nombre">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <div class="input-group form-group">
-                                            <input type="password" class="form-control"
-                                                placeholder="Validar Contrase&ntilde;a" required name="password_verify"
-                                                id="password_verify" />
-                                            <button type="button" class="btn btn-outline-primary showPassword">
-                                                <i class="fas fa-eye"></i>
-                                            </button>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input class="form-control" type="email2" name="email2" id="email2"
+                                                placeholder="Correo Electronico">
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row mt-2">
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
-                                            <img class="img-responsive" id="img_preview"
-                                                src="{{ asset('storage/svg/upload-user.svg') }}" height="190"
-                                                width="190">
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <div class="input-group form-group">
+                                                <input mdInput type="password" class="form-control" placeholder="Contrase&ntilde;a"
+                                                    name="password_user" id="password_user" required     [formControl]="formGroup.controls['password']"
+                                                    autocomplete="new-password"
+                                                    #password/>
+                                                <button type="button" class="btn btn-outline-primary showPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row mt-2">
-                                    Rol
-                                    <div class="col">
-                                        <select name="rol" name="rol" class="form-control">
-                                            <option value="">Seleccione...</option>
-                                            <!-- <option value="1">Administrador</option> -->
-                                            <option value="2">Lector</option>
-                                            <option value="3">Columnista</option>
-                                        </select>
+                                    <div class="row mt-2 pb-4">
+                                        <div class="col">
+                                            <div class="input-group form-group">
+                                                <input type="password" class="form-control"
+                                                    placeholder="Validar Contrase&ntilde;a" required name="password_confirm"
+                                                    id="password_confirm" />
+                                                <button type="button" class="btn btn-outline-primary showPassword">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
+    
+                                    
+                                {{--  </div>
+                               <div class="col">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="photo2">
+    
+                                                <div
+                                                    class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
+                                                    <img class="img-responsive" id="img_preview2"
+                                                        src="{{ asset('storage/svg/upload-user.svg') }}" height="190"
+                                                        width="190">
+                                                </div>
+                                            </label>
+                                        </div>
+    
+                                        <input type="file" name="photo2" id="photo2" accept="image/*" >
+                                        @error('photo2')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>--}}
+                                    <div class="row"> 
+                                        <label>
+                                            Rol
+                                        </label>
+                                    {{-- </div>
+                                    <div class="row mt-2">  --}}
+                                        <div class="col">
+                                            <select name="rol" name="rol" class="form-select">
+                                                <option value="">Seleccione...</option>
+                                                <!-- <option value="1">Administrador</option> -->
+                                                <option value="2">Lector</option>
+                                                <option value="3">Columnista</option>
+                                            </select>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
             </div>
-            </form>
-        </div>
+        </form>
     </div>
 </div>
-</div>
-<!--  -->
+<script>
+    // // Obtener referencia al input y a la imagen
+    // window.onload = function() {
+    //     const $seleccionArchivo = document.querySelector("#photo2"),
+    //         $imagenPrevisualiza = document.querySelector("#img_preview2");
+
+    //     // Escuchar cuando cambie
+    //     $seleccionArchivo.addEventListener("change", () => {
+    //         // Los archivo seleccionados, pueden ser muchos o uno
+    //         const archivo = $seleccionArchivo.files;
+    //         // Si no hay archivo salimos de la función y quitamos la imagen
+    //         if (!archivo || !archivo.length) {
+    //             $imagenPrevisualiza.src = "";
+    //             return;
+    //         }
+    //         // Ahora tomamos el primer archivo, el cual vamos a previsualizar
+    //         const sachivo = archivo[0];
+    //         // Lo convertimos a un objeto de tipo objtURL
+    //         const objtURL = URL.createObjectURL(sachivo);
+    //         // Y a la fuente de la imagen le ponemos el objtURL
+    //         $imagenPrevisualiza.src = objtURL;
+    //         // alert($imagenPrevisualiza.src);
+    //     });
+    // }
+</script>
