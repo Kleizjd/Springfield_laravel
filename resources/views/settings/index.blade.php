@@ -21,7 +21,7 @@
             </ul>
             <div class="card-body">
                 <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav_profile_tab">
+                    <div class="tab-pane fade show " id="nav-home" role="tabpanel" aria-labelledby="nav_profile_tab">
                         <div class="tab-pane active">
                             @if ($errors->any())
                                 <div class="alert alert-danger">
@@ -62,9 +62,12 @@
                                                 class="img__wrap border btn btn-outline-white d-flex justify-content-center">
                                                 <label for="photo">
                                                     <?php if (!empty(Auth::user()->photo)) : ?>
-                                                    <i class="far fa-edit img__description">Cambiar</i>
-                                                    <div class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
-                                                        <img class="img-responsive" id="img_preview" src="{{ asset(Auth::user()->photo) }}" height="190" width="190">
+                                                     <i class="far fa-edit img__description">Cambiar</i>
+                                                    <div
+                                                        class="img__wrap border border-dark btn btn-outline-white d-flex justify-content-center">
+                                                        <img class="img-responsive" id="img_preview"
+                                                            src="{{ asset(Auth::user()->photo) }}" height="190"
+                                                            width="190">
                                                     </div>
                                                     <?php else : ?>
                                                     <i class="far fa-edit img__description">Cambiar</i>
@@ -75,13 +78,11 @@
                                                             width="190">
                                                     </div>
                                                     <?php endif; ?>
-
-                                                </label>
-                                                <input type="file" name="photo" id="photo" accept="image/*"
-                                                    style="display: none;">
-                                                @error('photo')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
+                                                    <input type="file" name="photo" id="photo" accept="image/*"
+                                                        style="display: none;">
+                                                    @error('photo')
+                                                        <small class="text-danger">{{ $message }}</small>
+                                                    @enderror
                                             </div>
 
                                         </div>
@@ -130,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav_user_tab">
+                    <div class="tab-pane fade show active" id="nav-profile" role="tabpanel" aria-labelledby="nav_user_tab">
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col">
@@ -149,16 +150,16 @@
                                         <thead id="table_usuarios" class="table text-white bg-primary thead-primary">
                                             <thead class="bg-primary  text-white">
 
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Correo</th>
-                                                <th>Nombre Completo</th>
-                                                <th>Estado</th>
-                                                <th>Rol</th>
-                                                <th>Ver</th>
-                                                <th>Acciones</th>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Correo</th>
+                                                    <th>Nombre Completo</th>
+                                                    <th>Estado</th>
+                                                    <th>Rol</th>
+                                                    <th>Ver</th>
+                                                    <th>Acciones</th>
 
-                                            </tr>
+                                                </tr>
                                             </thead>
                                         <tbody>
                                             @foreach ($users as $user)
@@ -172,7 +173,8 @@
                                                         <form action="#" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="button" class="text-white btn btn-info"><i class="fa fa-eye"></i></button>
+                                                            <button type="button" class="text-white btn btn-info"><i
+                                                                    class="fa fa-eye"></i></button>
                                                         </form>
                                                     </td>
                                                     <td>
@@ -207,18 +209,18 @@
     </div>
 
 @endsection
-@section('css')
+{{-- @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 @stop
 @section('js')
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script> --}}
 <script>
-    $(document).ready(function () {
-        $('#table_usuarios').DataTable({ "lengthMenu": [[5,10,50,1],[5,10,50,'ALL']] });
-    });
+    // $(document).ready(function () {
+    //     $('#table_usuarios').DataTable({ "lengthMenu": [[5,10,50,1],[5,10,50,'ALL']] });
+    // });
     // Obtener referencia al input y a la imagen
     window.onload = function() {
         const $seleccionArchivos = document.querySelector("#photo"),
@@ -243,21 +245,19 @@
             document.getElementById("perfil2").src = objectURL;
 
         });
-         // PONER IMAGEN CUANDO SE CREE UN USUARIO
-        // const $seleccionArchivo = document.querySelector("#photo2"),
-        // $imagenPrevisualiza = document.querySelector("#img_preview2");
+        // PONER IMAGEN CUANDO SE CREE UN USUARIO
+        const $seleccionArchivo = document.querySelector("#photo2"),
+            $imagenPrevisualiza = document.querySelector("#img_preview2");
 
-        // $seleccionArchivo.addEventListener("change", () => {
-        //     const archivo = $seleccionArchivo.files;
-        //     if (!archivo || !archivo.length) {
-        //         $imagenPrevisualiza.src = "";
-        //         return;
-        //     }
-        //     const sachivo = archivo[1];
-        //     const objtURL = URL.createObjectURL(sachivo);
-        //     $imagenPrevisualiza.src = objtURL;
-        // });
+        $seleccionArchivo.addEventListener("change", () => {
+            const archivo = $seleccionArchivo.files;
+            if (!archivo || !archivo.length) {
+                $imagenPrevisualiza.src = "";
+                return;
+            }
+            const sachivo = archivo[0];
+            const objtURL = URL.createObjectURL(sachivo);
+            $imagenPrevisualiza.src = objtURL;
+        });
     }
 </script>
-    
-@endsection

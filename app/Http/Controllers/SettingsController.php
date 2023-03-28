@@ -49,19 +49,22 @@ class SettingsController extends Controller
             'rol' => 'required'
         ]);
         $user = new User();
+        // $user = Auth::user();
+
         $user->name = $request->nombre;
         $user->email = $request->email2;
         $user->password = Hash::make($request->password_user);
         $user->rol = $request->rol;
         // UPLOAD IMAGES
-        // $file = $request->file('photo');
-        // if (!empty($file)) {
-        //     $nombre =  time() . "_" . $file->getClientOriginalName();
-        //     $imagenes = $file->storeAs('public/uploads', $nombre);
-        //     $url = Storage::url($imagenes);
-        //     File::create(['url' => $url]);
-        //     $user->photo = $url;
-        // }
+        $file = $request->file('photo2');
+        // dd($file);
+        if (!empty($file)) {
+            $nombre =  time() . "_" . $file->getClientOriginalName();
+            $imagenes = $file->storeAs('public/uploads', $nombre);
+            $url = Storage::url($imagenes);
+            File::create(['url' => $url]);
+            $user->photo = $url;
+        }
         $user->save();
         return back()->with('message', 'User Created');
     }

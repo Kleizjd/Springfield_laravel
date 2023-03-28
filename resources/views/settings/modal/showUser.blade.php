@@ -1,5 +1,5 @@
-<!-- Modal create user -->
-<div class="modal fade" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal BUSCAR -->
+<div class="modal fade" id="modalShowUser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document" style="max-width: 50%;">
         @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -102,4 +102,3 @@
         </form>
     </div>
 </div>
-
