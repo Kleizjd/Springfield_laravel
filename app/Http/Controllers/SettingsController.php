@@ -49,6 +49,8 @@ class SettingsController extends Controller
             'rol' => 'required'
         ]);
         $user = new User();
+        // $user = User::user(); //alternativa
+        // $user->create();
         // $user = Auth::user();
 
         $user->name = $request->nombre;
