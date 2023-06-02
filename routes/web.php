@@ -24,9 +24,6 @@ Route::get('/', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/vista', function () {
-    return view('vista');
-})->name('vista');
 // SETTINGS
 Route::get('settings',[SettingsController::class, 'index'])->name('settings')->middleware('auth');
 Route::post('settings',[SettingsController::class, 'store'])->name('settings.store')->middleware('auth');
