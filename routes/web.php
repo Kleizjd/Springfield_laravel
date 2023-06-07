@@ -17,12 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function () {
-    return view('auth.login');
-})->name('login');
+    return view('welcome');
+});
+// Route::get('/', function () {
+//     return view('auth.login');
+// })->name('login');
 
 // SETTINGS
 Route::get('settings',[SettingsController::class, 'index'])->name('settings')->middleware('auth');
